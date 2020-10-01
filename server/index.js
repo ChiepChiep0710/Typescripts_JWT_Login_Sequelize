@@ -33,6 +33,7 @@ const app = express_1.default();
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use('/', user_route_1.default);
+app.use(express_1.default.static('public'));
 const init = () => __awaiter(void 0, void 0, void 0, function* () {
     yield assertDatabaseConnectionOk();
     console.log(`Starting Sequelize + Express example on port ${PORT}...`);

@@ -17,6 +17,7 @@ export class User extends Model {
   email!: string;
   password!: string;
   token: string;
+  avatar: string;
   generateAuthToken: () => object;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -41,6 +42,9 @@ User.init(
     },
     token: {
       type: DataTypes.STRING,
+    },
+    avatar: {
+      type: DataTypes.STRING
     }
   },
  

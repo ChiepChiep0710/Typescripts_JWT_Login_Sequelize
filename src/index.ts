@@ -18,6 +18,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', userRoutes);
+app.use(express.static('public'))
 const init= async (): Promise<void> => {
   await assertDatabaseConnectionOk();
 

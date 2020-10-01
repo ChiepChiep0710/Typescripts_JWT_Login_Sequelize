@@ -49,14 +49,14 @@ const forgotPassword = async (payload: { email: string }) => {
 		await sendMail({
 			email,
 			subject: 'change password',
-			text: `${process.env.feHost}/users/setNewPassword?token=${token}`,
+			text: `${process.env.feHost}/users/newPassword?token=${token}`,
 		});
 		return { message: 'sent mail successfully', status: 200 };
 	} catch (error) {
 		return { error: error.message, status: 400 };
 	}
 };
-const setNewPassword = async (payload: {
+const newPassword = async (payload: {
 	token: string;
 	password: string;
 	repeatPassword: string;
@@ -82,10 +82,22 @@ const setNewPassword = async (payload: {
 		return { error: error.message, status: 400 };
 	}
 };
+const uplodadAvatar = async (user: any, file: any )=>{
+	try {
+		user.avatar = file.path.split('/').slice(1).join('/');
+		await user.save();
+		return { message: ' upload successfully ', status: 200 };
+	} catch (error) {
+		return { error: error.message, status: 400 };
+	}
+
+}
+
 export default {
 	postUser,
 	userLogin,
 	userLogout,
 	forgotPassword,
-	setNewPassword,
+	newPassword,
+	uplodadAvatar
 };

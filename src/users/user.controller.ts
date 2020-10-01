@@ -33,7 +33,7 @@ const userLogout = async (req: Request, res: Response) => {
   if (error) res.status(status).send(error);
 };
 const forgotPassword = async (req: Request, res: Response) => {
-  console.log(req.body);
+  console.log(req);
   const {
     message: message,
     status: status,
@@ -42,16 +42,28 @@ const forgotPassword = async (req: Request, res: Response) => {
   if (message) res.status(status).send(message);
   if (error) res.status(status).send(error);
 };
-const setNewPassword = async (req: Request, res: Response) => {
-  console.log(req.body);
+
+const newPassword = async ( req: Request, res: Response) => {
+  console.log(req.body)
+  console.log(req.query)
   const {
     message: message,
     status: status,
     error: error,
-  } = await userService.setNewPassword(req.body);
+  } = await userService.newPassword(req.body);
+  if( message) res.status(status).send(message);
+  if(error) res.status(status).send(error);
+}
+const uploadAvatar = async ( req: Request, res: Response) =>{
+  //console.log(req.file)
+  const {
+    message: message,
+    status: status,
+    error: error,
+  } = await userService.uplodadAvatar(req.body.user, req.file)
   if (message) res.status(status).send(message);
   if (error) res.status(status).send(error);
-};
+}
 
 export default {
   userPost,
@@ -59,5 +71,6 @@ export default {
   getUser,
   userLogout,
   forgotPassword,
-  setNewPassword,
+  newPassword,
+  uploadAvatar
 };

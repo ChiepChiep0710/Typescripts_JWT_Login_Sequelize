@@ -46,6 +46,9 @@ User.init({
     },
     token: {
         type: sequelize_1.DataTypes.STRING,
+    },
+    avatar: {
+        type: sequelize_1.DataTypes.STRING
     }
 }, config);
 User.beforeCreate((user) => __awaiter(void 0, void 0, void 0, function* () {

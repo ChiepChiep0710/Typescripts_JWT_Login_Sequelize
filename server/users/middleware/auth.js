@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const users_model_1 = require("../users.model");
 const auth = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(req.file);
     const token = req.header('Authorization').replace('Bearer ', '');
     try {
         const data = jsonwebtoken_1.default.verify(token, process.env.JWT_KEY);

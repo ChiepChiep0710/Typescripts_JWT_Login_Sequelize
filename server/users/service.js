@@ -60,7 +60,7 @@ const forgotPassword = (payload) => __awaiter(void 0, void 0, void 0, function* 
         yield email_1.default({
             email,
             subject: 'change password',
-            text: `${process.env.feHost}/users/setNewPassword?token=${token}`,
+            text: `${process.env.feHost}/users/newPassword?token=${token}`,
         });
         return { message: 'sent mail successfully', status: 200 };
     }
@@ -68,7 +68,7 @@ const forgotPassword = (payload) => __awaiter(void 0, void 0, void 0, function* 
         return { error: error.message, status: 400 };
     }
 });
-const setNewPassword = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+const newPassword = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         //	console.log(payload);
         const { token, password, repeatPassword } = payload;
@@ -91,10 +91,21 @@ const setNewPassword = (payload) => __awaiter(void 0, void 0, void 0, function* 
         return { error: error.message, status: 400 };
     }
 });
+const uplodadAvatar = (user, file) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        user.avatar = file.path.split('/').slice(1).join('/');
+        yield user.save();
+        return { message: ' upload successfully ', status: 200 };
+    }
+    catch (error) {
+        return { error: error.message, status: 400 };
+    }
+});
 exports.default = {
     postUser,
     userLogin,
     userLogout,
     forgotPassword,
-    setNewPassword,
+    newPassword,
+    uplodadAvatar
 };

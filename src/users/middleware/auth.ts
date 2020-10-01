@@ -2,6 +2,7 @@ import {  Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken'
 import { User } from "../users.model"
 const auth = async (req: Request, res: Response, next: NextFunction) => {
+	console.log(req.file)
   const token = req.header('Authorization').replace('Bearer ', '');
   
 	try {

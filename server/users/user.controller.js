@@ -39,16 +39,25 @@ const userLogout = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         res.status(status).send(error);
 });
 const forgotPassword = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(req.body);
+    console.log(req);
     const { message: message, status: status, error: error, } = yield service_1.default.forgotPassword(req.body);
     if (message)
         res.status(status).send(message);
     if (error)
         res.status(status).send(error);
 });
-const setNewPassword = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const newPassword = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log(req.body);
-    const { message: message, status: status, error: error, } = yield service_1.default.setNewPassword(req.body);
+    console.log(req.query);
+    const { message: message, status: status, error: error, } = yield service_1.default.newPassword(req.body);
+    if (message)
+        res.status(status).send(message);
+    if (error)
+        res.status(status).send(error);
+});
+const uploadAvatar = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    //console.log(req.file)
+    const { message: message, status: status, error: error, } = yield service_1.default.uplodadAvatar(req.body.user, req.file);
     if (message)
         res.status(status).send(message);
     if (error)
@@ -60,5 +69,6 @@ exports.default = {
     getUser,
     userLogout,
     forgotPassword,
-    setNewPassword,
+    newPassword,
+    uploadAvatar
 };
