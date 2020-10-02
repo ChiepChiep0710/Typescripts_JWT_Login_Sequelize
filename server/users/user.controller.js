@@ -21,7 +21,7 @@ const userPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(status).send(error);
 });
 const userLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(req.body);
+    //console.log(req.body);
     const { user: user, status: status, error: error, token: token, } = yield service_1.default.userLogin(req.body);
     if (user)
         res.status(status).send({ user, token });
@@ -39,7 +39,7 @@ const userLogout = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         res.status(status).send(error);
 });
 const forgotPassword = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(req);
+    // console.log(req);
     const { message: message, status: status, error: error, } = yield service_1.default.forgotPassword(req.body);
     if (message)
         res.status(status).send(message);

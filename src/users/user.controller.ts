@@ -10,7 +10,7 @@ const userPost = async (req: Request, res: Response) => {
   if (error) res.status(status).send(error);
 };
 const userLogin = async (req: Request, res: Response) => {
-  console.log(req.body);
+  //console.log(req.body);
   const {
     user: user,
     status: status,
@@ -33,7 +33,7 @@ const userLogout = async (req: Request, res: Response) => {
   if (error) res.status(status).send(error);
 };
 const forgotPassword = async (req: Request, res: Response) => {
-  console.log(req);
+ // console.log(req);
   const {
     message: message,
     status: status,

@@ -71,7 +71,6 @@ const forgotPassword = (payload) => __awaiter(void 0, void 0, void 0, function* 
 });
 const setNewPassword = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        console.log(payload);
         const { token, password, repeatPassword } = payload;
         if (password !== repeatPassword) {
             throw new Error('password is not matched');

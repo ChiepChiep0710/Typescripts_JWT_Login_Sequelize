@@ -63,7 +63,6 @@ const setNewPassword = async (payload: {
 	repeatPassword: string;
 }) => {
 	try {
-	console.log(payload);
 		const { token, password, repeatPassword } = payload;
 		if (password !== repeatPassword) {
 			throw new Error('password is not matched');
