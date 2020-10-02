@@ -33,7 +33,7 @@ const userLogout = async (req: Request, res: Response) => {
   if (error) res.status(status).send(error);
 };
 const forgotPassword = async (req: Request, res: Response) => {
- // console.log(req);
+  // console.log(req);
   const {
     message: message,
     status: status,

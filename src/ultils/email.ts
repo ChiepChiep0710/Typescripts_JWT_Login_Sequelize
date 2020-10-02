@@ -37,4 +37,4 @@ const sendMail = async (payload: {
     throw new Error(error);
   }
 };
-export default sendMail
+export default sendMail;

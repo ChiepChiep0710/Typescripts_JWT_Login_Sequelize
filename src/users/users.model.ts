@@ -1,5 +1,5 @@
-import { Model, DataTypes } from "sequelize";
-import  database   from "../Database/database";
+import { Model, DataTypes } from 'sequelize';
+import database from '../Database/database';
 const bcrypt = require('bcryptjs');
 const validator = require('validator');
 const jwt = require('jsonwebtoken');
@@ -10,9 +10,12 @@ const config = {
 };
 
 export class User extends Model {
-	static findByCredentials(email: any, password: any): { user: any; error: any; } | PromiseLike<{ user: any; error: any; }> {
-		throw new Error("Method not implemented.");
-	}
+  static findByCredentials(
+    email: any,
+    password: any
+  ): { user: any; error: any } | PromiseLike<{ user: any; error: any }> {
+    throw new Error('Method not implemented.');
+  }
   id!: number;
   email!: string;
   password!: string;
@@ -31,29 +34,27 @@ User.init(
     },
     password: {
       type: DataTypes.STRING,
-
     },
-    email:  {
+    email: {
       type: DataTypes.STRING,
       unique: true,
       validate: {
-        isEmail: true
+        isEmail: true,
       },
     },
     token: {
       type: DataTypes.STRING,
     },
     avatar: {
-      type: DataTypes.STRING
-    }
+      type: DataTypes.STRING,
+    },
   },
- 
-  config,
- 
+
+  config
 );
-User.beforeCreate( async (user: any) =>{
+User.beforeCreate(async (user: any) => {
   user.password = await bcrypt.hash(user.password, 8);
-})
+});
 
 User.prototype.generateAuthToken = async function (): Promise<string> {
   // tao token dua tren id cua user
@@ -63,7 +64,10 @@ User.prototype.generateAuthToken = async function (): Promise<string> {
   await user.save();
   return token;
 };
-User.findByCredentials = async function (email: string, password: string): Promise<any> {
+User.findByCredentials = async function (
+  email: string,
+  password: string
+): Promise<any> {
   // tim user dung
   try {
     const user = await User.findOne({ where: { email: email } });
@@ -80,7 +84,4 @@ User.findByCredentials = async function (email: string, password: string): Promi
     return { error: error };
   }
 };
-User.sync({ force: false }).then(() => console.log("Node table created"));
-
-
-
+User.sync({ force: false }).then(() => console.log('Node table created'));
