@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const users_model_1 = require("./users.model");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const email_1 = __importDefault(require("../ultils/email"));
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const postUser = (body) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user = yield users_model_1.User.create(body);
@@ -68,9 +69,9 @@ const forgotPassword = (payload) => __awaiter(void 0, void 0, void 0, function* 
         return { error: error.message, status: 400 };
     }
 });
-const newPassword = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+const setNewPassword = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        //	console.log(payload);
+        console.log(payload);
         const { token, password, repeatPassword } = payload;
         if (password !== repeatPassword) {
             throw new Error('password is not matched');
@@ -83,9 +84,9 @@ const newPassword = (payload) => __awaiter(void 0, void 0, void 0, function* () 
         if (!user) {
             throw new Error();
         }
-        user.password = password;
+        user.password = yield bcryptjs_1.default.hash(password, 8);
         yield user.save();
-        return { message: 'change password successfully' };
+        return { message: 'change password successfully', status: 200 };
     }
     catch (error) {
         return { error: error.message, status: 400 };
@@ -106,6 +107,6 @@ exports.default = {
     userLogin,
     userLogout,
     forgotPassword,
-    newPassword,
+    setNewPassword,
     uplodadAvatar
 };

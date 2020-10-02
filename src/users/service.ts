@@ -1,6 +1,7 @@
 import { User } from './users.model';
 import jwt from 'jsonwebtoken';
 import sendMail from '../ultils/email';
+import bcrypt from 'bcryptjs'
 const postUser = async (body: any) => {
 	try {
 		const user = await User.create(body);
@@ -56,13 +57,13 @@ const forgotPassword = async (payload: { email: string }) => {
 		return { error: error.message, status: 400 };
 	}
 };
-const newPassword = async (payload: {
+const setNewPassword = async (payload: {
 	token: string;
 	password: string;
 	repeatPassword: string;
 }) => {
 	try {
-	//	console.log(payload);
+	console.log(payload);
 		const { token, password, repeatPassword } = payload;
 		if (password !== repeatPassword) {
 			throw new Error('password is not matched');
@@ -75,9 +76,9 @@ const newPassword = async (payload: {
 		if (!user) {
 			throw new Error();
 		}
-		user.password = password;
+		user.password = await bcrypt.hash(password, 8);
 		await user.save();
-		return { message: 'change password successfully' };
+		return { message: 'change password successfully', status: 200 };
 	} catch (error) {
 		return { error: error.message, status: 400 };
 	}
@@ -98,6 +99,6 @@ export default {
 	userLogin,
 	userLogout,
 	forgotPassword,
-	newPassword,
+	setNewPassword,
 	uplodadAvatar
 };

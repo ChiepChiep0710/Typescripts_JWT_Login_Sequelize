@@ -46,10 +46,9 @@ const forgotPassword = (req, res) => __awaiter(void 0, void 0, void 0, function*
     if (error)
         res.status(status).send(error);
 });
-const newPassword = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(req.body);
-    console.log(req.query);
-    const { message: message, status: status, error: error, } = yield service_1.default.newPassword(req.body);
+const setNewPassword = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    //console.log(req.body)
+    const { message: message, status: status, error: error, } = yield service_1.default.setNewPassword(req.body);
     if (message)
         res.status(status).send(message);
     if (error)
@@ -69,6 +68,6 @@ exports.default = {
     getUser,
     userLogout,
     forgotPassword,
-    newPassword,
-    uploadAvatar
+    setNewPassword,
+    uploadAvatar,
 };
